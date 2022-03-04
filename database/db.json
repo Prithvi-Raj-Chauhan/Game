@@ -1,0 +1,9 @@
+{
+  "profile": { "name": "", "bal": 0, "inventory": [] },
+  "shop": {
+    "item": {
+      "price": 0,
+      "type": ""
+    }
+  }
+}
