@@ -1,3 +1,5 @@
+from utils.mini_games.RandomNumberGuesser import RandomNumberGuesser
+
 class Player:
     def __init__(self, name: str, bal: int) -> None:
         self.name = name
