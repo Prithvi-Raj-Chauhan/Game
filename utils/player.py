@@ -1,4 +1,3 @@
-from this import d
 from utils.mini_games.RandomNumberGuesser import RandomNumberGuesser
 
 class Player:
