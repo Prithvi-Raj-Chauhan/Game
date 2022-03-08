@@ -11,7 +11,6 @@ class Player:
     def handle(self, inp: str):
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()
-        elif inp == 'rng': RandomNumberGuesser.runGameLoop()
     
     def react(self, msg: str):
         self.msg = msg
