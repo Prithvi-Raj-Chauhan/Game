@@ -1,4 +1,3 @@
-import random
 from utils.player import Player
 
 if __name__ == '__main__':

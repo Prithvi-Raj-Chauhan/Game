@@ -1,6 +1,3 @@
-from utils.mini_games.RandomNumberGuesser import RandomNumberGuesser
-
-
 class Player:
     def __init__(self, name: str, bal: int) -> None:
         self.name = name
@@ -14,6 +11,7 @@ class Player:
     def handle(self, inp: str):
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()
+        elif inp == 'rng': RandomNumberGuesser.runGameLoop()
     
     def react(self, msg: str):
         self.msg = msg
