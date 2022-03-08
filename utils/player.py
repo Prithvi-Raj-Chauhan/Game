@@ -1,7 +1,11 @@
+from json import load, dump
+
 class Player:
-    def __init__(self, name: str, bal: int) -> None:
-        self.name = name
-        self.bal = bal
+    def __init__(self, path: str) -> None:
+        self.data: dict = load(open(path))
+        self.name = self.data['profile']['name']
+        self.bal = self.data['profile']['bal']
+        self.inv = self.data['profile']['inventory']
         self.msg = ""
 
     def cmd(self, prompt):
