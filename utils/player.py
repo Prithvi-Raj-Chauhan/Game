@@ -2,6 +2,7 @@ from json import load, dump
 
 class Player:
     def __init__(self, path: str) -> None:
+        self.path = path
         self.data: dict = load(open(path))
         self.name = self.data['profile']['name']
         self.bal = self.data['profile']['bal']
@@ -15,6 +16,7 @@ class Player:
     def handle(self, inp: str):
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()
+        elif inp == 'beg': self.addMoney(100)
     
     def react(self, msg: str):
         self.msg = msg
@@ -47,6 +49,10 @@ class Player:
 
     def update(self):
         self.msg = str()
+        self.data['profile']['name'] = self.name
+        self.data['profile']['bal'] = self.bal
+        self.data['profile']['inventory'] = self.inv
+        dump(self.data, open(self.path, 'w'))
 
 def profile(p: Player):
     profile = p.generateProfile()
