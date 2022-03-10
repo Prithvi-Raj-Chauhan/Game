@@ -9,10 +9,6 @@ class Player:
         self.inv = self.data['profile']['inventory']
         self.msg = ""
 
-    def cmd(self, prompt):
-        inp = input(prompt)
-        self.handle(inp)
-
     def handle(self, inp: str):
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()

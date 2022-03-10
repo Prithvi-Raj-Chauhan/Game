@@ -18,6 +18,7 @@ if __name__ == '__main__':
         init_db()
     player = Player('db.json') 
     while True:
-        player.cmd("Enter the command: ")
+        cmd = input("Enter the command: ")
+        player.handle(cmd)
         print(player.response)
         player.update()
