@@ -27,6 +27,7 @@ class Player:
 
     def addMoney(self, amount: int):
         self.bal += amount
+        self.react(f"Added amount {amount}")
     
     def subMoney(self, amount: int) -> bool:
         if amount<self.bal:
