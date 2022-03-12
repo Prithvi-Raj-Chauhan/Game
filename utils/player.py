@@ -12,7 +12,7 @@ class Player:
     def handle(self, inp: str):
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()
-        elif inp == 'beg': self.addMoney(100)
+        elif inp == 'beg': self.beg()
     
     def react(self, msg: str):
         self.msg = msg
@@ -21,9 +21,12 @@ class Player:
     def response(self):
         return self.msg
 
-    def addMoney(self, amount: int):
+    def addMoney(self, amount: int, msg: str = ""):
         self.bal += amount
-        self.react(f"Added amount {amount}")
+        if not msg:
+            self.react(f"Added amount {amount}")
+        else:
+            self.react(msg)
     
     def subMoney(self, amount: int) -> bool:
         if amount<self.bal:
@@ -31,6 +34,13 @@ class Player:
             return True
         else:
             return False
+
+    def beg(self):
+        from random import randint
+        chance = randint(1,100)
+        if not chance % 5:
+            self.addMoney(5000, "You beggar take this money!")
+        else: self.react("You jerk get lost!")
 
     def generateProfile(self) -> dict:
         return {
