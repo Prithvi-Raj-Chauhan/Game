@@ -1,18 +1,21 @@
 from json import load, dump
 
 class Player:
-    def __init__(self, path: str) -> None:
+    def __init__(self, path: str, shop) -> None:
         self.path = path
-        self.data: dict = load(open(path))
+        self.data: dict[str, dict] = load(open(path))
         self.name = self.data['profile']['name']
         self.bal = self.data['profile']['bal']
         self.inv = self.data['profile']['inventory']
         self.msg = ""
 
-    def handle(self, inp: str):
+        self.shop = shop
+
+    def handle(self, inp: str, param = None):
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()
         elif inp == 'beg': self.beg()
+        elif inp == 'buy': self.buy(param)
     
     def react(self, msg: str):
         self.msg = msg
@@ -41,6 +44,10 @@ class Player:
         if not chance % 5:
             self.addMoney(5000, "You beggar take this money!")
         else: self.react("You jerk get lost!")
+
+    def buy(self, item):
+        self.inv.append(self.shop.buy(item))
+        self.react(f"Successfully bought {item}!")
 
     def generateProfile(self) -> dict:
         return {
