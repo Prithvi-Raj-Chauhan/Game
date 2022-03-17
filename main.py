@@ -7,9 +7,11 @@ items_dict = load(open('./db.json'))['shop']
 items = {
     key: Item(key, value['price'], value['reward']) for key, value in items_dict.items()
 }
-print(items)
 
 def init_db():
+    """
+    This method will run if the there is no db.json in the directory. This will make sure for no errors
+    """
     name = input("Enter you name: ")
     with open('db.json', 'w') as f:
         db = {
@@ -20,12 +22,12 @@ def init_db():
     print("Finished intialising !")
 
 if __name__ == '__main__':
-    if 'db.json' not in listdir():
+    if 'db.json' not in listdir(): # Checking if db.json exists
         print("\n===Intialising for first time===")
         init_db()
-    shop = Shop(items, 'db.json')
-    player = Player('db.json', shop) 
-    while True:
+    shop = Shop(items, 'db.json') # Intialising the shop
+    player = Player('db.json', shop) # Intialising player object
+    while True: # Game loop
         cmd = input("Enter the command: ")
         player.handle(*(cmd.split(" ")))
         print(player.response)

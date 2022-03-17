@@ -12,6 +12,7 @@ class Player:
         self.shop = shop
 
     def handle(self, inp: str, param = None):
+        """ The main entry point of the player class. Handles every command issued """
         if inp == 'profile': self.react(profile(self))
         elif inp == 'exit': self.exit()
         elif inp == 'beg': self.beg()
@@ -40,6 +41,9 @@ class Player:
             return False
 
     def beg(self):
+        """
+        The beg function of the player object. This has a 5% chance of giving you 5000 PRC
+        """
         from random import randint
         chance = randint(1,100)
         if not chance % 5:
@@ -47,6 +51,9 @@ class Player:
         else: self.react("You jerk get lost!")
 
     def buy(self, item):
+        """
+        The function if there is no duplicate, appends an item to your inventory. Else scolds you.
+        """
         if item not in self.inv:
             self.inv.append(self.shop.buy(item))
             self.react(f"Successfully bought {item}!")
@@ -54,18 +61,30 @@ class Player:
             self.react(f"You already have a {item}! Don't be greedy.")
 
     def generateProfile(self) -> dict:
+        """
+        Generates the player profile in a dictionary format
+        """
         return {
             'name': self.name,
             'bal': self.bal
         }
 
     def exit(self):
+        """
+        Exits the game
+        """
         import time
         print("Exiting in 3 seconds...")
         time.sleep(3)
         exit()
 
     def update(self):
+        """ 
+        This does many things:
+            1. Changes your message to blank string
+            2. Sets all of your balance and inventory to the current one
+            3. Writes your data in the db.json
+        """
         self.msg = str()
         self.data['profile']['name'] = self.name
         self.data['profile']['bal'] = self.bal

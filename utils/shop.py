@@ -37,12 +37,3 @@ class Shop:
     def commit(self):
         from json import dump
         dump(self.data, open(self.path, 'w'))
-
-SHOVEL = Item("shovel", 50000, 5000)
-
-ITEMS = {
-    'shovel': SHOVEL
-}
-
-if __name__ == '__main__':
-    print(SHOVEL.representAsDict())
