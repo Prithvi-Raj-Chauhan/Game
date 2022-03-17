@@ -16,6 +16,7 @@ class Player:
         elif inp == 'exit': self.exit()
         elif inp == 'beg': self.beg()
         elif inp == 'buy': self.buy(param)
+        elif inp == 'inv': self.react("\n".join(self.inv))
     
     def react(self, msg: str):
         self.msg = msg
@@ -46,8 +47,11 @@ class Player:
         else: self.react("You jerk get lost!")
 
     def buy(self, item):
-        self.inv.append(self.shop.buy(item))
-        self.react(f"Successfully bought {item}!")
+        if item not in self.inv:
+            self.inv.append(self.shop.buy(item))
+            self.react(f"Successfully bought {item}!")
+        else:
+            self.react(f"You already have a {item}! Don't be greedy.")
 
     def generateProfile(self) -> dict:
         return {
