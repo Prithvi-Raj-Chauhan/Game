@@ -37,3 +37,9 @@ class Shop:
     def commit(self):
         from json import dump
         dump(self.data, open(self.path, 'w'))
+
+    def findItemByName(self, name) -> Item:
+        for item in self.items:
+            if item.name == name:
+                return item
+        return None

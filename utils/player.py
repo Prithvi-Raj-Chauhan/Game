@@ -55,8 +55,12 @@ class Player:
         The function if there is no duplicate, appends an item to your inventory. Else scolds you.
         """
         if item not in self.inv:
-            self.inv.append(self.shop.buy(item))
-            self.react(f"Successfully bought {item}!")
+            item_object = self.shop.findItemByName(item)
+            if self.bal > item_object.price:
+                self.bal -= item_object.price
+                self.inv.append(self.shop.buy(item))
+                return self.react(f"Successfully bought {item}!")
+            return self.react("You do not have enough money to buy this item. Sad broken guy...")
         else:
             self.react(f"You already have a {item}! Don't be greedy.")
 
